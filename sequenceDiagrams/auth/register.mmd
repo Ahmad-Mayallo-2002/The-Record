@@ -1,0 +1,41 @@
+sequenceDiagram
+actor User
+participant Client
+participant "Auth Controller" as Controller
+participant "Auth Service" as Service
+participant "User Repository" as Repo
+participant "Password Service" as Password
+participant "File Storage" as Storage
+database DB
+
+User ->> Client: Fill registration form
+Client ->> Controller: POST /auth/register
+
+
+Controller ->> Service: register(dto, image)
+
+Service ->> Repo: findByEmail(email)
+Repo ->> DB: SELECT user WHERE email = ?
+DB -->> Repo: User / null
+Repo -->> Service: User / null
+
+alt Email already exists
+    Service -->> Controller: ConflictException (409)
+    Controller -->> Client: 409 Email already exists
+else Email not found
+    opt Image provided
+        Service ->> Storage: Upload image
+        Storage -->> Service: imageUrl
+    end
+
+    Service ->> Password: Hash password
+    Password -->> Service: hashedPassword
+
+    Service ->> Repo: create(user)
+    Repo ->> DB: INSERT user
+    DB -->> Repo: User created
+    Repo -->> Service: User
+
+    Service -->> Controller: User created
+    Controller -->> Client: 201 Created
+end

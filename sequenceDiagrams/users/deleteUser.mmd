@@ -1,0 +1,36 @@
+sequenceDiagram
+actor Client
+participant "User Controller" as Controller
+participant "User Service" as Service
+participant "User Repository" as Repo
+database DB
+
+Client ->> Controller: DELETE /users/:id
+
+Controller ->> Service: deleteUser(id, currentUser)
+
+Service ->> Repo: findById(id)
+Repo ->> DB: SELECT * FROM users WHERE id = ?
+DB -->> Repo: User / null
+Repo -->> Service: User / null
+
+alt User not found
+    Service -->> Controller: NotFoundException (404)
+    Controller -->> Client: 404 User not found
+else User found
+
+    alt Current user is owner or admin
+        Service ->> Repo: delete(user)
+        Repo ->> DB: DELETE FROM users
+        DB -->> Repo: Deleted
+        Repo -->> Service: Success
+
+        Service -->> Controller: Success
+        Controller -->> Client: 204 No Content
+
+    else Unauthorized
+        Service -->> Controller: ForbiddenException (403)
+        Controller -->> Client: 403 Forbidden
+    end
+
+end

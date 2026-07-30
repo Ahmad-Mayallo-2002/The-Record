@@ -1,0 +1,25 @@
+sequenceDiagram
+actor User
+participant Client
+participant "Comment Controller" as Controller
+participant "Comment Service" as Service
+participant "Comment Repository" as Repo
+database DB
+
+User ->> Client: View comment
+Client ->> Controller: GET /comments/:id
+
+Controller ->> Service: getComment(id)
+
+Service ->> Repo: findById(id)
+Repo ->> DB: SELECT comment
+DB -->> Repo: Comment / null
+Repo -->> Service: Comment / null
+
+alt Comment not found
+    Service -->> Controller: NotFoundException (404)
+    Controller -->> Client: 404 Comment not found
+else Comment found
+    Service -->> Controller: Comment
+    Controller -->> Client: 200 OK
+end

@@ -1,0 +1,31 @@
+sequenceDiagram
+actor User
+participant Client
+participant "Post Controller" as Controller
+participant "Post Service" as Service
+participant "File Storage" as Storage
+participant "Post Repository" as Repo
+database DB
+
+User ->> Client: Create post
+Client ->> Controller: POST /posts
+
+Controller ->> Service: createPost(dto, image, currentUser, content)
+
+
+opt Image provided
+    Service ->> Storage: Upload image
+    Storage -->> Service: imageUrl
+end
+
+alt No Content
+    Service ->> Controller: You Cannot Create Empty Post
+    Controller ->> Client: 400 Error You Cannot Create Empty Post
+end
+    Service ->> Repo: create(post)
+    Repo ->> DB: INSERT post
+    DB -->> Repo: Created post
+    Repo -->> Service: Post
+
+Service -->> Controller: Post
+Controller -->> Client: 201 Created

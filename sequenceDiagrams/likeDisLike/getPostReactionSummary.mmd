@@ -1,0 +1,20 @@
+sequenceDiagram
+actor User
+participant Client
+participant "Reaction Controller" as Controller
+participant "Reaction Service" as Service
+participant "Reaction Repository" as Repo
+database DB
+
+User ->> Client: View post reactions
+Client ->> Controller: GET /posts/:postId/reactions/summary
+
+Controller ->> Service: getPostReactionSummary(postId)
+
+Service ->> Repo: countLikesAndDislikes(postId)
+Repo ->> DB: COUNT likes and dislikes
+DB -->> Repo: Summary
+Repo -->> Service: {likes, dislikes}
+
+Service -->> Controller: Summary
+Controller -->> Client: 200 OK

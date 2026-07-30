@@ -1,0 +1,45 @@
+sequenceDiagram
+actor User
+participant Client
+participant "Post Controller" as Controller
+participant "Post Service" as Service
+participant "File Storage" as Storage
+participant "Post Repository" as Repo
+database DB
+
+User ->> Client: Edit post
+Client ->> Controller: PATCH /posts/:id
+
+Controller ->> Service: updatePost(id, dto, image, currentUser)
+
+Service ->> Repo: findById(id)
+Repo ->> DB: SELECT post
+DB -->> Repo: Post / null
+Repo -->> Service: Post / null
+
+alt Post not found
+    Service -->> Controller: NotFoundException (404)
+    Controller -->> Client: 404 Post not found
+else Post found
+
+    alt Current user is owner
+
+        opt New image provided
+            Service ->> Storage: Upload image
+            Storage -->> Service: imageUrl
+        end
+
+        Service ->> Repo: update(post)
+        Repo ->> DB: UPDATE post
+        DB -->> Repo: Updated post
+        Repo -->> Service: Updated post
+
+        Service -->> Controller: Updated post
+        Controller -->> Client: 200 OK
+
+    else Not owner
+        Service -->> Controller: ForbiddenException (403)
+        Controller -->> Client: 403 Forbidden
+    end
+
+end

@@ -1,0 +1,25 @@
+sequenceDiagram
+actor User
+participant Client
+participant "Post Controller" as Controller
+participant "Post Service" as Service
+participant "Post Repository" as Repo
+database DB
+
+User ->> Client: View post
+Client ->> Controller: GET /posts/:id
+
+Controller ->> Service: getPostById(id)
+
+Service ->> Repo: findById(id)
+Repo ->> DB: SELECT post
+DB -->> Repo: Post / null
+Repo -->> Service: Post / null
+
+alt Post not found
+    Service -->> Controller: NotFoundException (404)
+    Controller -->> Client: 404 Post not found
+else Post found
+    Service -->> Controller: Post
+    Controller -->> Client: 200 OK
+end

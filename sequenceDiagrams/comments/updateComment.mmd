@@ -1,0 +1,37 @@
+sequenceDiagram
+actor User
+participant Client
+participant "Comment Controller" as Controller
+participant "Comment Service" as Service
+participant "Comment Repository" as Repo
+database DB
+
+User ->> Client: Edit comment
+Client ->> Controller: PATCH /comments/:id
+
+Controller ->> Service: updateComment(id, dto, currentUser)
+
+Service ->> Repo: findById(id)
+Repo ->> DB: SELECT comment
+DB -->> Repo: Comment / null
+Repo -->> Service: Comment / null
+
+alt Comment not found
+    Service -->> Controller: NotFoundException (404)
+    Controller -->> Client: 404 Comment not found
+else Comment found
+
+    alt Current user is owner or admin
+        Service ->> Repo: update(comment)
+        Repo ->> DB: UPDATE comment
+        DB -->> Repo: Updated
+        Repo -->> Service: Updated
+
+        Service -->> Controller: Updated comment
+        Controller -->> Client: 200 OK
+    else Unauthorized
+        Service -->> Controller: ForbiddenException (403)
+        Controller -->> Client: 403 Forbidden
+    end
+
+end

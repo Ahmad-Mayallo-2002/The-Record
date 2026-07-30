@@ -1,0 +1,43 @@
+sequenceDiagram
+actor Client
+participant "User Controller" as Controller
+participant "User Service" as Service
+participant "User Repository" as Repo
+participant "File Storage" as Storage
+database DB
+
+Client ->> Controller: PATCH /users/:id
+
+Controller ->> Service: updateUser(id, dto, image, currentUser)
+
+Service ->> Repo: findById(id)
+Repo ->> DB: SELECT * FROM users WHERE id = ?
+DB -->> Repo: User / null
+Repo -->> Service: User / null
+
+alt User not found
+    Service -->> Controller: NotFoundException (404)
+    Controller -->> Client: 404 User not found
+else User found
+
+    alt Current user is owner or admin
+
+        opt New image provided
+            Service ->> Storage: Upload image
+            Storage -->> Service: imageUrl
+        end
+
+        Service ->> Repo: update(user)
+        Repo ->> DB: UPDATE users
+        DB -->> Repo: Updated user
+        Repo -->> Service: Updated user
+
+        Service -->> Controller: Updated user
+        Controller -->> Client: 200 OK
+
+    else Unauthorized
+        Service -->> Controller: ForbiddenException (403)
+        Controller -->> Client: 403 Forbidden
+    end
+
+end

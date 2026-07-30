@@ -1,0 +1,37 @@
+sequenceDiagram
+actor User
+participant Client
+participant "Comment Controller" as Controller
+participant "Comment Service" as Service
+participant "Comment Repository" as Repo
+database DB
+
+User ->> Client: Delete comment
+Client ->> Controller: DELETE /comments/:id
+
+Controller ->> Service: deleteComment(id, currentUser)
+
+Service ->> Repo: findById(id)
+Repo ->> DB: SELECT comment
+DB -->> Repo: Comment / null
+Repo -->> Service: Comment / null
+
+alt Comment not found
+    Service -->> Controller: NotFoundException (404)
+    Controller -->> Client: 404 Comment not found
+else Comment found
+
+    alt Current user is owner or admin
+        Service ->> Repo: delete(comment)
+        Repo ->> DB: DELETE comment
+        DB -->> Repo: Deleted
+        Repo -->> Service: Success
+
+        Service -->> Controller: Success
+        Controller -->> Client: 204 No Content
+    else Unauthorized
+        Service -->> Controller: ForbiddenException (403)
+        Controller -->> Client: 403 Forbidden
+    end
+
+end

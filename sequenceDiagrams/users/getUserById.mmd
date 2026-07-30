@@ -1,0 +1,23 @@
+sequenceDiagram
+actor Client
+participant "User Controller" as Controller
+participant "User Service" as Service
+participant "User Repository" as Repo
+database DB
+
+Client ->> Controller: GET /users/:id
+
+Controller ->> Service: getUserById(id)
+
+Service ->> Repo: findById(id)
+Repo ->> DB: SELECT * FROM users WHERE id = ?
+DB -->> Repo: User / null
+Repo -->> Service: User / null
+
+alt User not found
+    Service -->> Controller: NotFoundException (404)
+    Controller -->> Client: 404 User not found
+else User found
+    Service -->> Controller: User
+    Controller -->> Client: 200 OK
+end

@@ -1,0 +1,45 @@
+sequenceDiagram
+actor User
+participant Client
+participant "Reaction Controller" as Controller
+participant "Reaction Service" as Service
+participant "Reaction Repository" as Repo
+database DB
+
+User ->> Client: Dislike post
+Client ->> Controller: POST /posts/:postId/dislike
+
+Controller ->> Service: addDislike(postId, currentUser)
+
+Service ->> Repo: findUserReaction(postId, userId)
+Repo ->> DB: SELECT reaction
+DB -->> Repo: Reaction / null
+Repo -->> Service: Reaction / null
+
+alt Existing Dislike
+    Service ->> Repo: deleteReaction()
+    Repo ->> DB: DELETE dislike
+    DB -->> Repo: Deleted
+    Repo -->> Service: Success
+
+    Service -->> Controller: Dislike removed
+    Controller -->> Client: 200 OK
+else Existing Like
+    Service ->> Repo: deleteReaction()
+    Repo ->> DB: DELETE like
+    DB -->> Repo: Deleted
+
+    Service ->> Repo: createDislike()
+    Repo ->> DB: INSERT dislike
+    DB -->> Repo: Created
+
+    Service -->> Controller: Dislike added
+    Controller -->> Client: 201 Created
+else No Reaction
+    Service ->> Repo: createDislike()
+    Repo ->> DB: INSERT dislike
+    DB -->> Repo: Created
+
+    Service -->> Controller: Dislike added
+    Controller -->> Client: 201 Created
+end

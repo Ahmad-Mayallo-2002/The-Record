@@ -1,0 +1,25 @@
+sequenceDiagram
+actor Admin
+participant Client
+participant "Comment Controller" as Controller
+participant "Comment Service" as Service
+participant "Comment Repository" as Repo
+database DB
+
+Admin ->> Client: View all comments
+Client ->> Controller: GET /comments
+
+Controller ->> Service: getComments(currentUser)
+
+alt Current user is Admin
+    Service ->> Repo: findAll()
+    Repo ->> DB: SELECT * FROM comments
+    DB -->> Repo: Comments
+    Repo -->> Service: Comments
+
+    Service -->> Controller: Comments
+    Controller -->> Client: 200 OK
+else Not Admin
+    Service -->> Controller: ForbiddenException (403)
+    Controller -->> Client: 403 Forbidden
+end

@@ -1,0 +1,44 @@
+classDiagram
+    class Role {
+        <<enumeration>>
+        USER
+        ADMIN
+    }
+
+    class User {
+        +string id
+        +string username
+        +string email
+        +string password
+        +Role role
+        +string image
+    }
+
+    class Post {
+        +string id
+        +string content
+        +string image
+        +string authorId
+    }
+
+    class Comment {
+        +string id
+        +string content
+        +string authorId
+        +string postId
+    }
+
+    class LikeAndDislike {
+        +string id
+        +bool isLiked
+        +bool isDisLiked
+        +string userId
+        +string postId
+    }
+
+    User --> Role : role
+    User "1" --> "0..*" Post : authors
+    User "1" --> "0..*" Comment : writes
+    User "1" --> "0..*" LikeAndDislike : reacts
+    Post "1" --> "0..*" Comment : has
+    Post "1" --> "0..*" LikeAndDislike : receives
