@@ -1,5 +1,5 @@
 import {
-  IsEmpty,
+  IsNotEmpty,
   IsString,
   IsUUID,
   MaxLength,
@@ -7,17 +7,17 @@ import {
 } from 'class-validator';
 
 export class CreatePostDto {
-  @IsEmpty()
+  @IsNotEmpty()
   @IsString()
   @MaxLength(5000)
   @MinLength(1)
   content!: string;
 
-  @IsEmpty()
+  @IsNotEmpty()
   @IsString()
   image!: string;
 
-  @IsEmpty()
+  @IsNotEmpty()
   @IsUUID()
   author!: string;
 }
