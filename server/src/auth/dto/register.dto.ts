@@ -32,6 +32,5 @@ export class registerDto {
   confirmPassword!: string;
 
   @IsOptional()
-  @IsString()
-  image!: string;
+  image?: Express.Multer.File;
 }

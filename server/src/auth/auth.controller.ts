@@ -10,7 +10,8 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('register')
-  async register(@Body() input: registerDto) {
+  async register(@Body() input: registerDto, @Req() req: Request) {
+    if (req.file) input.image = req.file;
     return await this.authService.register(input);
   }
 

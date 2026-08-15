@@ -18,8 +18,11 @@ export class User {
   @Prop({ type: String, enum: Roles, default: Roles.USER })
   role!: Roles;
 
-  @Prop({ type: String })
-  image!: string;
+  @Prop({ type: Object })
+  image!: {
+    url: string;
+    public_id: string;
+  };
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

@@ -17,6 +17,8 @@ import { generate } from 'randomstring';
 import { getEmailTemplate } from '../mjml/convertMJMLToHTML';
 import { Cache, CACHE_MANAGER } from '@nestjs/cache-manager';
 import { resetPasswordDto } from './dto/resetPassword';
+import { upload } from '../common/uploader';
+import { Image } from '../types/image.type';
 
 @Injectable()
 export class AuthService {
@@ -27,17 +29,30 @@ export class AuthService {
   ) {}
 
   async register(input: registerDto): Promise<UserDocument> {
-    const { username, email, password, confirmPassword } = input;
+    const { username, email, password, confirmPassword, image } = input;
     const emailExist = await this.userModel.findOne({ email });
     if (emailExist) throw new ConflictException('This email is already exist');
     if (password !== confirmPassword)
       throw new BadRequestException('Passwords must be equals');
 
     const hashPassword = await hash(password, 10);
+
+    const url_publicId: Image = {
+      url: '',
+      public_id: '',
+    };
+
+    if (image) {
+      const { secure_url, public_id } = await upload(image);
+      url_publicId.url = secure_url;
+      url_publicId.public_id = public_id;
+    }
+
     const newUser = await this.userModel.create({
       username,
       email,
       password: hashPassword,
+      image: url_publicId,
     });
 
     return newUser;

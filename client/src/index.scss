@@ -1,0 +1,11 @@
+@import "bootstrap/dist/css/bootstrap.min.css";
+
+$primary: #01261f;
+$paragraph: #505f76;
+
+body {
+  background-color: #f7f9fb;
+}
+
+$flex-directions: (column, row, row-reverse, column-reverse);
+$display: (block, inline, inline-block, flex, grid);
