@@ -1,0 +1,20 @@
+$display: block, inline, inline-block, flex, grid, inline-flex, inline-grid;
+
+@each $i in $display {
+  .#{$i} {
+    display: $i;
+  }
+}
+
+$flex-justify: center, space-between, space-evenly, space-around, start, end;
+
+@each $i in $flex-justify {
+  .justify-#{$i} {
+    justify-content: $i;
+  }
+
+  .items-#{$i} {
+    align-items: $i;
+  }
+}
+

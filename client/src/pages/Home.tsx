@@ -1,7 +1,6 @@
 function HomePage() {
   return (
     <>
-      <p>adads</p>
     </>
   );
 }

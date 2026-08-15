@@ -1,0 +1,25 @@
+nav {
+  border-bottom: 1px solid #c1c8c4;
+
+  .navbar-brand,
+  .navbar-brand:hover {
+    color: var(--primary-800);
+  }
+
+  .nav-link {
+    padding-bottom: 3px !important;
+  }
+
+  .nav-link:hover {
+    color: var(--primary-800) !important;
+  }
+
+  .nav-link.active {
+    color: var(--primary-800) !important;
+    border-bottom: 3px solid var(--primary-800);
+  }
+
+  .navbar-nav {
+    flex-grow: 1;
+  }
+}

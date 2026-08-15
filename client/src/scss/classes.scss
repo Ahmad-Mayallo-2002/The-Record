@@ -1,0 +1,47 @@
+@use "./variables.scss";
+
+.text-primary-800 {
+  color: variables.$primary-800;
+}
+
+.bg-primary-800 {
+  background-color: variables.$primary-800;
+}
+
+.border-primary-800 {
+  border-color: variables.$primary-800;
+}
+
+.bg-transparent {
+  background: transparent;
+}
+
+.border-color-transparent {
+  border-color: transparent;
+}
+
+.btn-primary {
+  border-color: variables.$primary-700;
+  background-color: variables.$primary-700;
+  color: #fff;
+  transition:
+    background-color 300ms,
+    border-color 300ms;
+
+  &:hover {
+    background-color: variables.$primary-600;
+    border-color: variables.$primary-600;
+  }
+}
+
+.w-full {
+  width: 100%;
+}
+
+.w-fit {
+  width: fit-content;
+}
+
+.h-screen {
+  height: 100vh;
+}
