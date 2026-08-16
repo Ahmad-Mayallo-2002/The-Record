@@ -14,7 +14,7 @@ export const navLinks: NavLinks[] = [
   },
   {
     name: "About",
-    path: "/aout",
+    path: "/about",
   },
   {
     name: "Contact",
