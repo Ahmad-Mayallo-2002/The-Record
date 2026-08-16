@@ -35,7 +35,7 @@ export default function Footer() {
               <Text
                 fontSize={14}
                 mx={{ base: "auto", md: 0 }}
-                color="#414846"
+                color="var(--paragraph)"
                 maxW="450px"
                 lineHeight={1.7}
               >
@@ -54,7 +54,7 @@ export default function Footer() {
               >
                 journal
               </Text>
-              <List.Root fontSize={14} color="#414846">
+              <List.Root fontSize={14} color="var(--paragraph)">
                 <List.Item>Archive</List.Item>
                 <List.Item my={1}>RSS Feed</List.Item>
                 <List.Item>Topics</List.Item>
@@ -70,7 +70,7 @@ export default function Footer() {
               >
                 legal
               </Text>
-              <List.Root fontSize={14} color="#414846">
+              <List.Root fontSize={14} color="var(--paragraph)">
                 <List.Item mb={1}>Privacy Policy</List.Item>
                 <List.Item>Terms of Service</List.Item>
               </List.Root>
@@ -86,7 +86,7 @@ export default function Footer() {
           gapY={2}
           flexDir={{ base: "column", md: "row" }}
         >
-          <Text fontSize={14} color="#414846">
+          <Text fontSize={14} color="var(--paragraph)">
             &copy; 2026 The Record. Built for long-form immersion.
           </Text>
           <Flex gap={4}>

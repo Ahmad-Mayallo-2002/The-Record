@@ -42,13 +42,7 @@ export default function Navbar() {
 
         <IconButton
           size="sm"
-          bgColor="transparent"
-          color="var(--primary-base)"
-          border="1px solid var(--primary-base)"
-          _hover={{
-            color: "#fff",
-            bgColor: "var(--primary-base)",
-          }}
+          className="main-button-outline"
           display={{ base: "flex", md: "none" }}
           onClick={handleToggle}
         >
@@ -56,7 +50,7 @@ export default function Navbar() {
         </IconButton>
 
         <List.Root
-          display={open ? "flex" : "none"}
+          display={{ base: open ? "flex" : "none", md: "flex" }}
           flexDir={{ base: "column", md: "row" }}
           w={{ base: "full", md: "fit" }}
           gap="4px 16px"
