@@ -32,6 +32,7 @@ export default function Navbar() {
         <Link
           color="var(--primary-base)"
           fontWeight={700}
+          fontFamily="'Source Serif 4'"
           fontSize="3xl"
           className="brand"
           href="/"

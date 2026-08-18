@@ -33,21 +33,9 @@ function LoginPage() {
     navigate("/");
   };
   return (
-    <Center bgColor="#F7F9FB" minH="calc(100vh - 78px)">
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        action="#"
-        style={{ width: "100%", maxWidth: "450px" }}
-      >
-        <VStack
-          p={8}
-          my={16}
-          bgColor="#fff"
-          rounded="md"
-          boxShadow="sm"
-          gap={5}
-          align="stretch"
-        >
+    <Center className="auth-center">
+      <form onSubmit={handleSubmit(onSubmit)} action="#" className="auth-form">
+        <VStack className="auth-box">
           {/* Heading */}
           <VStack gap={1} textAlign="center">
             <Heading size="3xl" color="var(--primary-900)">
@@ -105,6 +93,15 @@ function LoginPage() {
               </ErrorText>
             )}
           </Root>
+
+          <Link
+            fontSize="13px"
+            color="blue.500"
+            fontWeight="semibold"
+            href="/forgot-password"
+          >
+            Forgot Password?
+          </Link>
 
           {/* Submit */}
           <Button

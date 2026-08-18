@@ -9,13 +9,13 @@ const Home = lazy(() => import("./pages/Home"));
 const About = lazy(() => import("./pages/About"));
 const Contact = lazy(() => import("./pages/Contact"));
 const CreatePost = lazy(() => import("./pages/CreatePost"));
-const ForgotPassword = lazy(() => import("./pages/ForogtPassword"));
+const ForgotPassword = lazy(() => import("./pages/auth/ForgotPassword"));
 const Login = lazy(() => import("./pages/auth/Login"));
 const Post = lazy(() => import("./pages/Post"));
 const Posts = lazy(() => import("./pages/Posts"));
-const ResetPassword = lazy(() => import("./pages/ResetPassword"));
+const ResetPassword = lazy(() => import("./pages/auth/ResetPassword"));
 const SignUp = lazy(() => import("./pages/auth/SignUp"));
-const VerificationCode = lazy(() => import("./pages/VerificationCode"));
+const VerificationCode = lazy(() => import("./pages/auth/VerificationCode"));
 const Error = lazy(() => import("./pages/Error"));
 
 function App() {
