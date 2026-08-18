@@ -36,7 +36,6 @@ function HomePage() {
               <Heading
                 fontWeight={700}
                 fontSize={{ base: "3xl", lg: "5xl" }}
-                fontFamily="'Source Serif 4'"
                 lineHeight={1.1}
                 color="var(--primary-base)"
                 my={4}
@@ -64,7 +63,6 @@ function HomePage() {
             <Heading
               fontWeight={700}
               mb={2}
-              fontFamily="'Source Serif 4'"
               fontSize="3xl"
               color="var(--neutral-900)"
             >
@@ -109,7 +107,6 @@ function HomePage() {
         <Container>
           <Box textAlign="center" mb={6}>
             <Heading
-              fontFamily="'Source Serif 4'"
               fontWeight={700}
               fontSize="3xl"
               color="var(--neutral-900)"

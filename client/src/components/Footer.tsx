@@ -24,7 +24,6 @@ export default function Footer() {
           >
             <GridItem>
               <Heading
-                fontFamily="'Source Serif 4'"
                 fontSize={"3xl"}
                 mb={2}
                 fontWeight="bold"

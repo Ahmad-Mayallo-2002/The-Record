@@ -32,12 +32,7 @@ function AboutPage() {
         color="#fff"
       >
         <Text textTransform="uppercase">since 2026</Text>
-        <Heading
-          fontWeight={700}
-          fontFamily="'Source Serif 4'"
-          fontSize="3xl"
-          my={4}
-        >
+        <Heading fontWeight={700} fontSize="3xl" my={4}>
           The pursuit of depth in an era of brevity.
         </Heading>
         <Text maxW="500px" textAlign="center" mx="auto">
@@ -51,7 +46,6 @@ function AboutPage() {
         <Container>
           <Heading
             fontWeight={700}
-            fontFamily="'Source Serif 4'"
             fontSize="3xl"
             color="var(--neutral-900)"
             mb={4}
@@ -98,13 +92,7 @@ function AboutPage() {
       {/* The Curators */}
       <Box className="curators" py={12} px={4}>
         <Container>
-          <Heading
-            fontWeight={700}
-            fontFamily="'Source Serif 4'"
-            fontSize="3xl"
-            textAlign="center"
-            mb={4}
-          >
+          <Heading fontWeight={700} fontSize="3xl" textAlign="center" mb={4}>
             The Curators
           </Heading>
           <Text
@@ -127,7 +115,6 @@ function AboutPage() {
                   fontWeight={700}
                   color="var(--neutral-900)"
                   fontSize="2xl"
-                  fontFamily="'Source Serif 4'"
                   my={2}
                 >
                   {curator.name}
@@ -153,16 +140,16 @@ function AboutPage() {
             justifyContent="space-between"
           >
             <Box textAlign={{ base: "center", md: "start" }}>
-              <Heading
-                color="#fff"
-                fontWeight={700}
-                fontFamily="'Source Serif 4'"
-                fontSize="3xl"
-                mb={4}
-              >
+              <Heading color="#fff" fontWeight={700} fontSize="3xl" mb={4}>
                 Have a story to tell?
               </Heading>
-              <Text maxW="500px" mx={{base: "auto", md: 0}} color="#fff" fontSize="14px" lineHeight={2}>
+              <Text
+                maxW="500px"
+                mx={{ base: "auto", md: 0 }}
+                color="#fff"
+                fontSize="14px"
+                lineHeight={2}
+              >
                 We are always looking for fresh perspectives and deep
                 investigations. Join our roster of contributors or reach out
                 with feedback.

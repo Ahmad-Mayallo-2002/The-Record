@@ -10,11 +10,11 @@ const About = lazy(() => import("./pages/About"));
 const Contact = lazy(() => import("./pages/Contact"));
 const CreatePost = lazy(() => import("./pages/CreatePost"));
 const ForgotPassword = lazy(() => import("./pages/ForogtPassword"));
-const Login = lazy(() => import("./pages/Login"));
+const Login = lazy(() => import("./pages/auth/Login"));
 const Post = lazy(() => import("./pages/Post"));
 const Posts = lazy(() => import("./pages/Posts"));
 const ResetPassword = lazy(() => import("./pages/ResetPassword"));
-const SignUp = lazy(() => import("./pages/SignUp"));
+const SignUp = lazy(() => import("./pages/auth/SignUp"));
 const VerificationCode = lazy(() => import("./pages/VerificationCode"));
 const Error = lazy(() => import("./pages/Error"));
 
@@ -33,7 +33,7 @@ function App() {
           <Route path="/posts" element={<Posts />} />
           <Route path="/posts/:id" element={<Post />} />
           <Route path="/reset-password" element={<ResetPassword />} />
-          <Route path="/signup" element={<SignUp />} />
+          <Route path="/register" element={<SignUp />} />
           <Route path="/verification-code" element={<VerificationCode />} />
           <Route path="*" element={<Error />} />
         </Routes>

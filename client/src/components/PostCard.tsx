@@ -31,11 +31,7 @@ export default function PostCard({
             <Span>{date.getMinutes() + 1} min ago</Span>
           </Flex>
 
-          <Title
-            fontFamily="'Source Serif 4'"
-            color="var(--neutral-900)"
-            fontWeight={700}
-          >
+          <Title color="var(--neutral-900)" fontWeight={700}>
             {title}
           </Title>
           <Description fontSize={13} my={2}>

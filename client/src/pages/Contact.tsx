@@ -32,7 +32,6 @@ function ContactPage() {
           <Box mb={4}>
             <Heading
               fontWeight={700}
-              fontFamily="'Source Serif 4'"
               mb={4}
               fontSize="4xl"
               color="var(--neutral-900)"
@@ -110,7 +109,6 @@ function ContactPage() {
               <Box className="our-editorial-office">
                 <Heading
                   fontWeight={700}
-                  fontFamily="'Source Serif 4'"
                   color="var(--neutral-900)"
                   fontSize="2xl"
                 >
@@ -144,7 +142,6 @@ function ContactPage() {
               <Box mt={12} className="connect-directly">
                 <Heading
                   fontWeight={700}
-                  fontFamily="'Source Serif 4'"
                   color="var(--neutral-900)"
                   fontSize="2xl"
                   mb={2}
@@ -181,7 +178,6 @@ function ContactPage() {
               <Box className="social-discourse" mt={6}>
                 <Heading
                   fontWeight={700}
-                  fontFamily="'Source Serif 4'"
                   color="var(--neutral-900)"
                   fontSize="2xl"
                   mb={2}

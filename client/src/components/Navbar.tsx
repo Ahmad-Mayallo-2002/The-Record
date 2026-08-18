@@ -33,7 +33,6 @@ export default function Navbar() {
           color="var(--primary-base)"
           fontWeight={700}
           fontSize="3xl"
-          fontFamily="'Source Serif 4'"
           className="brand"
           href="/"
         >
